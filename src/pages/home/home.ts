@@ -23,7 +23,6 @@ export class HomePage {
         this.locac.request(this.locac.REQUEST_PRIORITY_HIGH_ACCURACY).then(() => {
           this.geolocation.getCurrentPosition(options).then((position: Geoposition) => {
             this.getLocation(position);
-
           }).catch((err) => {
             alert(err);
           })

@@ -10,8 +10,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class WebservicesProvider {
-  path: string = 'http://192.168.42.225/gps/Controlador/GPSControl.php';
-  url = "http://192.168.42.225/gps/Controlador";
+  path: string = 'http://192.168.1.7/gps/Controlador/GPSControl.php';
+  url = "http://192.168.1.7/gps/Controlador";
   constructor(public http: HttpClient) {
     console.log('Hello WebservicesProvider Provider');
   }
@@ -30,7 +30,7 @@ export class WebservicesProvider {
 
   Grabar(lugar) {
     return new Promise(resolve => {
-      this.http.get(this.path+'?op=1&txtcod=&txtlugar='+lugar)
+      this.http.get(this.path+'?op=1&txtlugar='+lugar)
         .subscribe(data => {
           resolve(data);
         }, err => {
