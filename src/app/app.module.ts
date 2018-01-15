@@ -3,12 +3,14 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import {HttpClientModule} from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {Geolocation} from "@ionic-native/geolocation";
 import {NativeGeocoder} from "@ionic-native/native-geocoder";
 import {LocationAccuracy} from "@ionic-native/location-accuracy";
+import { WebservicesProvider } from '../providers/webservices/webservices';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import {LocationAccuracy} from "@ionic-native/location-accuracy";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -30,7 +33,8 @@ import {LocationAccuracy} from "@ionic-native/location-accuracy";
     Geolocation,
     NativeGeocoder,
     LocationAccuracy,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    WebservicesProvider
   ]
 })
 export class AppModule {}

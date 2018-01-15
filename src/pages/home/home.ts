@@ -3,14 +3,15 @@ import {NavController, ToastController} from 'ionic-angular';
 import {Geolocation, Geoposition} from "@ionic-native/geolocation";
 import {NativeGeocoder, NativeGeocoderReverseResult} from "@ionic-native/native-geocoder";
 import {LocationAccuracy} from "@ionic-native/location-accuracy";
+import {WebservicesProvider} from "../../providers/webservices/webservices";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  constructor(public navCtrl: NavController, public geolocation: Geolocation, public geocoder: NativeGeocoder, public toaster: ToastController, public locac: LocationAccuracy) {
+  lugar:any;
+  constructor(public navCtrl: NavController, public geolocation: Geolocation, public webservice: WebservicesProvider,public geocoder: NativeGeocoder, public toaster: ToastController, public locac: LocationAccuracy) {
   }
 
   geoLocation() {
@@ -22,6 +23,7 @@ export class HomePage {
         this.locac.request(this.locac.REQUEST_PRIORITY_HIGH_ACCURACY).then(() => {
           this.geolocation.getCurrentPosition(options).then((position: Geoposition) => {
             this.getLocation(position);
+
           }).catch((err) => {
             alert(err);
           })
@@ -39,8 +41,16 @@ export class HomePage {
           duration: 4000
         });
         country.present();
+        this.webservice.Grabar(res.thoroughfare + " " + res.subThoroughfare + " - " + res.locality).then((result) => {
+          console.log(result);
+          this.lugar = result;
+        }, (err) => {
+          console.log(err);
+        });
       });
 
   }
+
+
 
 }
